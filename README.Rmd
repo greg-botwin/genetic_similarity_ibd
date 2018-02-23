@@ -32,3 +32,5 @@ kable(ibd_gwas_catalog %>%
   arrange(desc(n_snps)), caption = "Number of Unique SNPs with P <= 5x10^-8 per IBD Trait")
 ```
 
+## Determine Genetic Similarity 
+"We evaluated genetic similarity between diseases by the number of shared mutations through the exact binominal test. Mutations were assigned to a disease if they associated with either the disease itself or its descendant phenotypes according to the hierarchical relationships of diseases as defined in HPO. For two diseases, A and B are associated with m mutations and n mutations, respectively. The chance of one mutation related with disease A in all mutations existed in the database is m/N, where N is the total number of mutations in the HGMD. Thus, the expected number of mutations shared by both A and B is m × n/N. We excluded pairs of diseases where one disease was a descendant of the other." DOI: 10.1002/humu.23358 
