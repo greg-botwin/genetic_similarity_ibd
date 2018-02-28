@@ -93,4 +93,3 @@ datatable(cd_self_rep_uk_bb_snps %>%
 ```{r}
 table(cd_self_rep_uk_bb_snps$CHR)
 ```
-
