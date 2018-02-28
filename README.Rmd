@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
 library(knitr)
 library(readr)
 library(DT)
+library(qqman)
 library(tidyverse)
 ```
 
@@ -65,11 +66,31 @@ kable(ibd_gwas_catalog %>%
 ## Determine Genetic Similarity (Draft)
 "For two diseases, A and B are associated with m mutations and n mutations, respectively. The chance of one mutation related with disease A in all mutations existed in the database is m/N, where N is the total number of variants in the UKBB. Thus, the expected number of mutations shared by both A and B is m × n/N..." DOI: 10.1002/humu.23358 
 
-### Review of IBD Genes
+### Review of IBD Genetic Similarity
 ```{r}
 ibd_overlap <- read_csv("data/sig_assoc_pheno_qc_ibd_verlap.csv")
 datatable(ibd_overlap) %>%
   formatRound(columns = ~ibd_snp_overlap + expected_number_overlap + ratio_overlap_expected)
 ```
 
+### UK Biobank CD Self Report Significant Associations
+
+```{r}
+cd_self_rep_uk_bb_snps <- read_csv("data/ibd_self_report_uk_bb_snps.csv")
+manhattan(cd_self_rep_uk_bb_snps, p = 'pval', snp = 'rsid.x')
+```
+
+```{r}
+table(cd_self_rep_uk_bb_snps$CHR)
+``` 
+
+```{r}
+datatable(cd_self_rep_uk_bb_snps %>%
+  select(-phenotype_code, -description, -Field, N.non.missing, -N.missing, -Notes,
+         -PHESANT.notes, -warning.for.case.control, -PHESANT.reassignments))
+```
+
+```{r}
+table(cd_self_rep_uk_bb_snps$CHR)
+```
 
